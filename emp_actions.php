@@ -19,9 +19,7 @@
 		    </div>
 		    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
 		      <div class="panel-body">
-		        <form method="post" action="get_expiring.php">
-					<buttom type="submit" class="btn btn-default">Get Users</button>
-				</form>
+		      	<a class="btn btn-default" href="get_expiring.php" role="button">Get Users</a>
 		      </div>
 		    </div>
 		  </div>
@@ -76,7 +74,7 @@
 				    <label for="gas">Gas:</label>
 				    <input type="number" class="form-control" name="gas" id="gas" placeholder="Gas">
 				  </div>
-				  <buttom type="submit" class="btn btn-default">Create New Car</button>
+				  <button type="submit" class="btn btn-default">Create New Car</button>
 				</form>
 		      </div>
 		    </div>
@@ -94,11 +92,11 @@
 		      <div class="panel-body">
 		       	<form method="post" action="get_rental_history.php">
 		       		<div class="form-group">
-			       		<select name="car">
+			       		<select name="vin">
 			       			<?php
 					    		$result = mysqli_query($conn, "SELECT * FROM Car NATURAL JOIN CarInfo WHERE Car.CI_ID = CarInfo.CI_ID");
 					    		while ($row = mysqli_fetch_assoc($result)) {
-					    			echo "<option value='".$row["C_VIN"]."'><p>".$row["MODEL"]." ".$row["MAKE"]."</p></option>";
+					    			echo "<option value='".$row["C_VIN"]."'><p>".$row["MAKE"]." ".$row["MODEL"]." with ".$row["C_VIN"]."</p></option>";
 					    		}
 					    	?>
 			       		</select>
@@ -133,7 +131,7 @@
 				    	?>
 				    </select>
 				  </div>
-				  <buttom type="submit" class="btn btn-default">Get All Cars From Location</button>
+				  <button type="submit" class="btn btn-default">Get All Cars From Location</button>
 				</form>
 		      </div>
 		    </div>
@@ -151,9 +149,7 @@
 		    </div>
 		    <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
 		      <div class="panel-body">
-		        <form action="get_cars_needing_main.php" method="post">
-		        	<button type="submit" class="btn btn-default">Get Cars</button>
-		        </form>
+		      	<a class="btn btn-default" href="get_cars_needing_main.php" role="button">Get Cars</a>
 		      </div>
 		    </div>
 		  </div>
@@ -169,9 +165,7 @@
 		    </div>
 		    <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
 		      <div class="panel-body">
-		        <form action="get_high_low.php" method="post">
-		        	<button type="submit" class="btn btn-default">Get High and Low</button>
-		        </form>
+		      	<a class="btn btn-default" href="get_high_low.php" role="button">Get High and Low</a>
 		      </div>
 		    </div>
 		  </div>
