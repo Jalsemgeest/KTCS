@@ -51,6 +51,7 @@
 		      </div>
 		    </div>
 		  </div>
+	  </div>
 
 		  <!-- Controls -->
 		  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
@@ -130,7 +131,6 @@
 	</body>
 	</html>
 	
-	</div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </body>
