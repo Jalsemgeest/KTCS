@@ -67,11 +67,70 @@
 		</div>
 	<!-- Show comments here -->
 	<?php
-	
-	
 
+	require_once("config/config.php");
+
+	$conn = mysqli_connect(HOST, USER, PASSWORD, DATABASE);
+
+	if (mysqli_connect_errno()) {
+		die("Failed to connect to the database.");
+	}
+	
+	
+	$submit = $_POST['submit'];
+	$title = $_POST['title'];
+	$comment = $_POST['Comment'];
+	
+	
+	if($submit){
+		if($title&$comment){
+			$insert=mysqli_query($conn,"INSERT INTO COMMENTS (COM_ID, MEM_ID, EMP_ID, TITLE, COMMENT) VALUES (''.''.'','$title','$comment') ");
+			echo "<meta HTTP-EQUIV='REFRESH' content='0; url=index.php'>";
+		}
+		else{
+			echo "please fill out all fields";
+		}
+	}
+	
 	?>
-</div>
+	<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	</head>
+
+	<body>
+	<br></br>
+	<h2> Comments </h2>
+	<left>
+	<form action="index.php" method="POST">
+	<table>
+	<tr><td><strong>Title:</strong> <br><input type="text" name ="title"/></td></tr>
+	<tr><td colspan="2"><strong>Comment:</strong> </td></tr>
+	<tr><td colspan="5"><textarea name ="comment" rows="10" cols="50"></textarea></td></tr>
+	<tr><td colspan="2"><input type="submit" name="submit" value="Comment"></td></tr>
+	</table>
+	<hr size = "1">
+	</form>
+
+	
+	
+    <?php
+	$getquery=mysqli_query($conn, "SELECT * FROM COMMENTS GROUP BY COM_ID ASC LIMIT 10;");
+	while($row=mysqli_fetch_assoc($getquery)){
+
+		$COM_ID = $row['COM_ID'];
+		$TITLE=$row['TITLE'];
+		$COMMENT=$row['COMMENT'];
+
+		echo "<strong>Title:</strong>", $TITLE . '<br/>' . '<br/>' . "<strong>Comment:</strong>" ,$COMMENT . '<br/>' . '<br/>' . '<hr size="1"/>';
+}
+	?>
+
+
+	</body>
+	</html>
+	
+	</div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </body>
