@@ -27,9 +27,9 @@
 
 				<thead>
 					<tr>
-						<td>ID</td>
-						<td>Name</td>
-						<td>Email</td>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Email</th>
 					</tr>
 				</thead>
 				<tbody>

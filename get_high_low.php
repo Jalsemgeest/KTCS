@@ -46,10 +46,10 @@
 					<table class="table">
 						<thead>
 							<tr>
-								<td>VIN</td>
-								<td>Make</td>
-								<td>Model</td>
-								<td>Rentals</td>
+								<th>VIN</th>
+								<th>Make</th>
+								<th>Model</th>
+								<th>Rentals</th>
 							</tr>
 						</thead>
 						<tbody>

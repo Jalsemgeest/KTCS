@@ -18,10 +18,10 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<td>VIN</td>
-					<td>Pick Up</td>
-					<td>Length</td>
-					<td>Location</td>
+					<th>VIN</th>
+					<th>Pick Up</th>
+					<th>Length</th>
+					<th>Location</th>
 				</tr>
 			</thead>
 			<tbody>

@@ -17,10 +17,10 @@
 		<table class="table">
 				<thead>
 					<tr>
-						<td>VIN</td>
-						<td>Make</td>
-						<td>Model</td>
-						<td>Reservations</td>
+						<th>VIN</th>
+						<th>Make</th>
+						<th>Model</th>
+						<th>Reservations</th>
 					</tr>
 				</thead>
 				<tbody>

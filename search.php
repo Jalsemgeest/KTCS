@@ -22,6 +22,7 @@
 			$drop_off->add(new DateInterval('PT'.strtoupper(mysql_real_escape_string($_POST["drop_off"])).'H'));
 
 
+			$no_cars = true;
 			//$newdate = ($pick_up + $drop_off);
 
 			//echo $model[0];//. " " . $date . " " . $pick_up . " " . $drop_off;
@@ -35,7 +36,6 @@
 			$vins = array();
 
 			while ($row = mysqli_fetch_assoc($result)) {
-				
 				array_push($vins, $row["C_VIN"]);
 			}
 
@@ -45,7 +45,7 @@
 			//$vins = array();
 			//$result = mysqli_query($conn, "SELECT * FROM Car WHERE CI_ID = '".$ci_id."';");
 
-			$qry = "SELECT * FROM Reservation WHERE '".$pick_up->format('H:i:s')."' < PICK_UP AND '".$drop_off->format('H:i:s')."' > PICK_UP AND";
+			$qry = "SELECT COUNT(*) as NUM FROM Reservation WHERE '".$pick_up->format('H:i:s')."' < PICK_UP AND '".$drop_off->format('H:i:s')."' < PICK_UP AND";
 
 			for ($i = 0; $i < sizeof($vins); $i++) {
 				if ($i == 0) {
@@ -62,6 +62,35 @@
 			$result = mysqli_query($conn, $qry);
 
 				// The vehicle is available!
+				
+				while ($row = mysqli_fetch_assoc($result)) {
+					// Then we can rent.
+					if ($row["NUM"] == 0) { ?>
+						<table class="table">
+						<caption>Cars Available</caption>
+						<tbody>
+						<thead>
+							<tr>
+								<th>Year</th><th>Make</th><th>Model</th><th>Rent</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php
+								$result = mysqli_query($conn, "SELECT * FROM Car NATURAL JOIN CarInfo NATURAL JOIN Location WHERE Car.CI_ID = CarInfo.CI_ID AND Car.LOC_ID = Location.LOC_ID AND C_VIN = '".$vins[0]."';");
+
+							?>
+						</tbody>
+					</table>
+					<?php } 
+						
+
+					// We cannot rent.
+					else {
+						echo "<h4>No cars are available.  Please <a href='check_availability.php'>search</a> again.</h4>";
+					}
+				}
+
+
 				?>
 				<table class="table">
 					<caption>Cars Available</caption>
@@ -72,11 +101,21 @@
 							</tr>
 						</thead>
 					<?php
-						$result = mysqli_query($conn, "SElECT * FROM Car NATURAL JOIN CarInfo NATURAL JOIN Location WHERE Car.CI_ID = CarInfo.CI_ID AND Car.LOC_ID = Location.LOC_ID AND C_VIN = '".$vins[0]."';");
+						$result = mysqli_query($conn, "SELECT * FROM Car NATURAL JOIN CarInfo NATURAL JOIN Location WHERE Car.CI_ID = CarInfo.CI_ID AND Car.LOC_ID = Location.LOC_ID AND C_VIN = '".$vins[0]."';");
 						while ($row = mysqli_fetch_assoc($result)) {
+							$no_cars = false;
 							echo "<tr>";
 								echo "<td>".$row["YEAR"]."</td>";
-								echo "<td>".$row["MAKE"]."</td><td>".$row["MODEL"]."</td><td><form method='post' action='rent.php'><input type='hidden' name='date' value='".$date."' /><input type='hidden' name='drop_off' value='".$drop_off2."' /><input type='hidden' name='pick_up' value='".$pick_up->format('H:i:s')."' /><input type='hidden' name='car_vin' value='".$row["C_VIN"]."'/><button type='submit' value='Submit'>Rent</button></td>";
+								echo "<td>".$row["MAKE"]."</td>";
+								echo "<td>".$row["MODEL"]."</td>";
+								echo "<td>";
+								echo "<form method='post' action='rent.php'>";
+								echo "<input type='hidden' name='date' value='".$date."' />";
+								echo "<input type='hidden' name='drop_off' value='".$drop_off2."' />";
+								echo "<input type='hidden' name='pick_up' value='".$pick_up->format('H:i:s')."' />";
+								echo "<input type='hidden' name='car_vin' value='".$row["C_VIN"]."'/>";
+								echo "<button type='submit' value='Submit'>Rent</button>";
+								echo "</td>";
 							echo "</tr>";
 						}
 					?>
@@ -84,7 +123,9 @@
 				</table>
 				<?php
 			
-				echo "<h4>No cars are available.  Please <a href='check_availability.php'>search</a> again.</h4>";
+				if ($no_cars) {
+					echo "<h4>No cars are available.  Please <a href='check_availability.php'>search</a> again.</h4>";
+				}
 				/*$used_vins = array();
 
 				while ($row = mysqli_fetch_assoc($result)) {
