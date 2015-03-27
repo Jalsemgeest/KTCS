@@ -14,7 +14,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <?php if (isset($_SESSION["USER_ID"]) || isset($_SESSION["EMP_ID"])) { 
+          <?php if (isset($_SESSION["USER_ID"])) { 
             if ($_SESSION["CURR_PAGE"] == "profile") { ?>
               <li class="active"><a href="profile.php">Profile</a></li>
               <?php } else { ?>
