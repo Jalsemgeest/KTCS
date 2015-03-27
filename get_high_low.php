@@ -8,6 +8,7 @@
 <body>
 	<?php require_once("template/top.php"); ?>
 	<div class="container">
+		<h4 style="text-align:center">Note: Vehicles that have not yet been rented will not be considered.</h4>
 		<div class="row">
 			<div class="col-md-6">
 				<h3 style="text-align:center;"><u>Highest Rentals</u></h3>
