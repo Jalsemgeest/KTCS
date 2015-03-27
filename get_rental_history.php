@@ -2,7 +2,7 @@
 <head>
 	<?php
 	 require_once("template/header.php");
-	 $_SESSION["CURR_PAGE"] = "expiringtoday"; ?>
+	 $_SESSION["CURR_PAGE"] = "rentalhistory"; ?>
 	<title>KTCS - Availability</title>
 </head>
 <body>

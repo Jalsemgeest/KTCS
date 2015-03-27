@@ -2,7 +2,7 @@
 <head>
 	<?php
 	 require_once("template/header.php");
-	 $_SESSION["CURR_PAGE"] = "expiringtoday"; ?>
+	 $_SESSION["CURR_PAGE"] = "showatlocation"; ?>
 	<title>KTCS - Availability</title>
 </head>
 <body>
@@ -34,7 +34,9 @@
 
 				echo "<tr><td>".$row["C_VIN"]."</td><td>".$row["MAKE"]."</td><td>".$row["MODEL"]."</td><td>";
 
-				$reservations = mysqli_query($conn, "SELECT * FROM Reservation WHERE C_VIN = '".$row["C_VIN"]."';");
+				$date = date("Y-m-d");
+
+				$reservations = mysqli_query($conn, "SELECT * FROM Reservation WHERE C_VIN = '".$row["C_VIN"]."' AND DATE > '".$date."';");
 				$count = 0;
 				while ($resRow = mysqli_fetch_assoc($reservations)) {
 					if ($count == 0) { ?>

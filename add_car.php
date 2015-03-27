@@ -2,7 +2,7 @@
 <head>
 	<?php
 	 require_once("template/header.php");
-	 $_SESSION["CURR_PAGE"] = "expiringtoday"; ?>
+	 $_SESSION["CURR_PAGE"] = "addcar"; ?>
 	<title>KTCS - Availability</title>
 </head>
 <body>
@@ -41,8 +41,7 @@
 				}
 			}
 
-			$result = mysqli_query($conn, "INSERT INTO Car(C_VIN, CI_ID, LOC_ID, STATUS, LAST_ODOM, LAST_GAS, DATE_OF_MAIN, ODOM_MAIN)".
-				"VALUES('".$vin."','".$carInfoId."','".$loc."','AVAILABLE','".$odom."','".$gas."','".date("Y-m-d")."','".$odom."';");
+			$result = mysqli_query($conn, "INSERT INTO Car(C_VIN, CI_ID, LOC_ID, STATUS, LAST_ODOM, LAST_GAS, DATE_OF_MAIN, ODOM_MAIN) VALUES('".$vin."','".$carInfoId."','".$loc."','AVAILABLE','".$odom."','".$gas."','".date("Y-m-d")."','".$odom."');");
 
 			echo "<h3>Car was successfully added to the database.</h3>";
 
