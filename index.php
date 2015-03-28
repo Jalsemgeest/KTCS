@@ -51,7 +51,7 @@
 		      </div>
 		    </div>
 		  </div>
-	  </div>
+	  	</div>
 
 		  <!-- Controls -->
 		  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
@@ -65,8 +65,9 @@
 		</div>
 		</div>
 		<div class="col-md-1"></div>
-		</div>
+	</div>
 	<!-- Show comments here -->
+	
 	<?php
 
 	require_once("config/config.php");
@@ -79,20 +80,22 @@
 	
 	
 	$submit = $_POST['submit'];
-	$title = $_POST['title'];
-	$comment = $_POST['Comment'];
+	$name = $_POST['title'];
+	$comment = $_POST['comment'];
 	
 	
 	if($submit){
-		if($title&$comment){
-			$insert=mysqli_query($conn,"INSERT INTO COMMENTS (COM_ID, MEM_ID, EMP_ID, TITLE, COMMENT) VALUES (''.''.'','$title','$comment') ");
+		if($name&&$comment){
+ 		$result =mysqli_query($conn,"INSERT INTO Comments (TITLE, COMMENT) VALUES ('".$name."', '".$comment."') ");
+			//echo "Thank you for your feedback.";
 			echo "<meta HTTP-EQUIV='REFRESH' content='0; url=index.php'>";
 		}
-		else{
-			echo "please fill out all fields";
-		}
+	 	else{
+	 		echo "please fill out all fields";
+ 		}
 	}
-	
+
+
 	?>
 	<html>
 	<head>
@@ -101,14 +104,14 @@
 
 	<body>
 	<br></br>
-	<h2> Comments </h2>
-	<left>
+	<h2> <center> Please leave us Comments! </h2>
+	<center>
 	<form action="index.php" method="POST">
 	<table>
 	<tr><td><strong>Title:</strong> <br><input type="text" name ="title"/></td></tr>
 	<tr><td colspan="2"><strong>Comment:</strong> </td></tr>
 	<tr><td colspan="5"><textarea name ="comment" rows="10" cols="50"></textarea></td></tr>
-	<tr><td colspan="2"><input type="submit" name="submit" value="Comment"></td></tr>
+	<tr><td colspan="2"><input type="submit" name="submit" value="Post"></td></tr>
 	</table>
 	<hr size = "1">
 	</form>
@@ -119,18 +122,17 @@
 	$getquery=mysqli_query($conn, "SELECT * FROM COMMENTS GROUP BY COM_ID ASC LIMIT 10;");
 	while($row=mysqli_fetch_assoc($getquery)){
 
-		$COM_ID = $row['COM_ID'];
 		$TITLE=$row['TITLE'];
 		$COMMENT=$row['COMMENT'];
 
-		echo "<strong>Title:</strong>", $TITLE . '<br/>' . '<br/>' . "<strong>Comment:</strong>" ,$COMMENT . '<br/>' . '<br/>' . '<hr size="1"/>';
-}
+		// echo "<strong>Title:</strong>", $TITLE . '<br/>' . '<br/>' . "<strong>Comment:</strong>" ,$COMMENT . '<br/>' . '<br/>' . '<hr size="1"/>';
+		echo "<strong>Title:</strong>", $TITLE . '<br/>' . '<br/>' .  $COMMENT . '<br/>' . '<br/>' . '<hr size="1"/>';
+	}
 	?>
-
 
 	</body>
 	</html>
-	
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </body>
