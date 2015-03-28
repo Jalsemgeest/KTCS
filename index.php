@@ -121,6 +121,7 @@
     <?php
 	$getquery=mysqli_query($conn, "SELECT * FROM COMMENTS GROUP BY COM_ID ASC LIMIT 10;");
 	while($row=mysqli_fetch_assoc($getquery)){
+		
 
 		$TITLE=$row['TITLE'];
 		$COMMENT=$row['COMMENT'];
