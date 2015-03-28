@@ -68,6 +68,7 @@
 	</div>
 	<!-- Show comments here -->
 	
+
 	<?php
 
 	require_once("config/config.php");
@@ -104,13 +105,13 @@
 
 	<body>
 	<br></br>
-	<h2> <center> Please leave us Comments! </h2>
+	<h2> <center> Please leave us feedback :)</h2><hr size="2"/>;
 	<center>
 	<form action="index.php" method="POST">
 	<table>
 	<tr><td><strong>Title:</strong> <br><input type="text" name ="title"/></td></tr>
 	<tr><td colspan="2"><strong>Comment:</strong> </td></tr>
-	<tr><td colspan="5"><textarea name ="comment" rows="10" cols="50"></textarea></td></tr>
+	<tr><td colspan="5"><textarea name ="comment" rows="15" cols="100"></textarea></td></tr>
 	<tr><td colspan="2"><input type="submit" name="submit" value="Post"></td></tr>
 	</table>
 	<hr size = "1">
@@ -121,13 +122,13 @@
     <?php
 	$getquery=mysqli_query($conn, "SELECT * FROM COMMENTS GROUP BY COM_ID ASC LIMIT 10;");
 	while($row=mysqli_fetch_assoc($getquery)){
-		
+
 
 		$TITLE=$row['TITLE'];
 		$COMMENT=$row['COMMENT'];
 
 		// echo "<strong>Title:</strong>", $TITLE . '<br/>' . '<br/>' . "<strong>Comment:</strong>" ,$COMMENT . '<br/>' . '<br/>' . '<hr size="1"/>';
-		echo "<strong>Title:</strong>", $TITLE . '<br/>' . '<br/>' .  $COMMENT . '<br/>' . '<br/>' . '<hr size="1"/>';
+		echo "<strong>Title:</strong>", $TITLE . '<br/>' .  $COMMENT . '<br/>' . '<hr size="1"/>';
 	}
 	?>
 
