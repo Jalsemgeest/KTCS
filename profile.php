@@ -49,6 +49,7 @@
 								<th>Reservation Number</th>
 								<th>Car</th>
 								<th>Address</th>
+								<th>Date</th>
 								<th>Pick Up</th>
 								<th>Drop Off</th>
 							</tr>
@@ -56,10 +57,11 @@
 						<tbody>
 							<?php
 								while ($row = mysqli_fetch_assoc($result)) {
-									echo "<tr><td>".$row["RES_NUM"]."</td><td>".$row["MAKE"] . " " . $row["MODEL"] ."</td><td>".$row["ADDRESS"]."</td><td>".$row["PICK_UP"]."</td><td>".$row["LENGTH"]." Hours</td></tr>";
+									echo "<tr><td>".$row["RES_NUM"]."</td><td>".$row["MAKE"] . " " . $row["MODEL"] ."</td><td>".$row["ADDRESS"]."</td><td>".$row["DATE"]."</td><td>".$row["PICK_UP"]."</td><td>".$row["LENGTH"]." Hours</td></tr>";
 								}
 								while ($row = mysqli_fetch_assoc($history)) {
-									echo "<tr><td>".$row["RES_NUM"]."</td><td>".$row["MAKE"] . " " . $row["MODEL"] ."</td><td>".$row["ADDRESS"]."</td><td>".$row["PICK_UP"]."</td><td>".$row["DROP_TIME"]."</td></tr>";	
+									$datetime = explode(" ", $row["PICK_TIME"]);
+									echo "<tr><td>".$row["RES_NUM"]."</td><td>".$row["MAKE"] . " " . $row["MODEL"] ."</td><td>".$row["ADDRESS"]."</td><td>".$datetime[0]."</td><td>".$datetime[1]."</td><td>".$row["DROP_TIME"]."</td></tr>";	
 								}
 							?>
 						</tbody>
