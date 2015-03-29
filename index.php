@@ -7,6 +7,57 @@
 	<?php require_once("template/top.php"); ?>
 
 	<div class="container">
+		<?php
+			if (isset($_SESSION["USER_ID"])) {
+				// User is logged in
+				// Check if there are any outstanding reservations that they currently have.
+				$date = date("Y-m-d");
+				$now = date("H:i:s");
+				
+				$result = mysqli_query($conn, "SELECT * FROM Reservation NATURAL JOIN Car NATURAL JOIN CarInfo WHERE Reservation.C_VIN = Car.C_VIN AND Car.CI_ID = CarInfo.CI_ID AND MEM_ID = '".$_SESSION["USER_ID"]."' AND DATE <= '".$date."' OR (DATE = '".$date."' AND PICK_UP <= '".$now."');");
+				
+				if (mysqli_num_rows($result) > 0) {
+					?>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Reservation Number</th>
+								<th>Car</th>
+								<th>Picked Up</th>
+								<th>Return</th>
+							</tr>
+						</thead>
+						<tbody>
+					<?php
+						while ($row = mysqli_fetch_assoc($result)) {
+							echo "<tr>";
+							echo "<td>".$row["RES_NUM"]."</td>";
+							echo "<td>".$row["MAKE"]. " " . $row["MODEL"] ."</td>";
+							echo "<td>".$row["DATE"]. " " . $row["PICK_UP"]."</td>";
+							echo "<td>";
+							?>
+								<form action="return_car.php" method="post">
+									<div class="form-group">
+										<label for="odom">Odometer</label>
+									<?php echo "<input type='number' class='form-control' min='".$row["LAST_ODOM"]."' name='odom' id='odom' placeholder='Odometer' >"; ?>
+									</div>
+								  <div class="form-group">
+								    <?php echo "<input type='hidden' class='form-control' name='returned' id='returned' value='".$row["RES_NUM"]."'>"; ?>
+								  </div>
+								  <button type="submit" class="btn btn-default">Return Rental</button>
+								</form>
+							<?php
+							echo "</td>";
+							echo "</tr>";
+						}
+					?>
+						</tbody>
+					</table>
+					<?php
+				}
+			}	
+		?>
+
 		<div style="max-height:200px;" class="row">
 			<div class="col-md-1"></div>
 			<div class="col-md-10">
