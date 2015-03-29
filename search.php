@@ -39,36 +39,15 @@
 				array_push($vins, $row["C_VIN"]);
 			}
 
-			//echo $vins[0];
-
-			// Find VIN number
-			//$vins = array();
-			//$result = mysqli_query($conn, "SELECT * FROM Car WHERE CI_ID = '".$ci_id."';");
-
-			$qry = "SELECT COUNT(*) as NUM FROM Reservation WHERE '".$pick_up->format('H:i:s')."' < PICK_UP AND '".$drop_off->format('H:i:s')."' < PICK_UP AND";
-
-			for ($i = 0; $i < sizeof($vins); $i++) {
-				if ($i == 0) {
-					$qry = $qry . " C_VIN = '".$vins[$i]."'";
-				}
-				else {
-					$qry = $qry . " OR C_VIN = '".$vins[$i]."'";
-				}
-			}
-
-			$qry = $qry .";";
-			
-			$qry = "SELECT * FROM Cars";
-			$qry = "SELECT COUNT(*) AS `NUM` FROM `Reservation` WHERE `DATE`!= CURDATE() AND `C_VIN`= '$vins[0]'";
+			$qry = "SELECT COUNT(*) AS NUM FROM Reservation WHERE DATE != '".$date."' AND C_VIN = '".$vins[0]."';";
 
 			$result = mysqli_query($conn, $qry);
 
 				// The vehicle is available!
 				
-				while ($row = mysqli_fetch_assoc($result)) {
-					//echo "Nums Absolute: ".$row["NUM"];
+				while ($row1 = mysqli_fetch_assoc($result)) {
 					// Then we can rent.
-					if ($row["NUM"] == 0) { ?>
+					if ($row1["NUM"] == 0) { ?>
 						<table class="table">
 						<caption>Cars Available</caption>
 						<tbody>
@@ -79,59 +58,36 @@
 						</thead>
 						<tbody>
 							<?php
-								$result = mysqli_query($conn, "SELECT * FROM Car NATURAL JOIN CarInfo NATURAL JOIN Location WHERE Car.CI_ID = CarInfo.CI_ID AND Car.LOC_ID = Location.LOC_ID AND C_VIN = '".$vins[0]."';");
-
+								$qry = mysqli_query($conn, "SELECT * FROM Car NATURAL JOIN CarInfo NATURAL JOIN Location WHERE Car.CI_ID = CarInfo.CI_ID AND Car.LOC_ID = Location.LOC_ID AND C_VIN = '".$vins[0]."';");
+								while ($row = mysqli_fetch_assoc($qry)) {
+									$no_cars = false;
+									echo "<tr>";
+										echo "<td>".$row["YEAR"]."</td>";
+										echo "<td>".$row["MAKE"]."</td>";
+										echo "<td>".$row["MODEL"]."</td>";
+										echo "<td>";
+										if (isset($_SESSION["USER_ID"])) {
+											echo "<form method='post' action='rent.php'>";
+										} else {
+											echo "<form method='post' action='login.php'>";
+										}
+										echo "<input type='hidden' name='date' value='".$date."' />";
+										echo "<input type='hidden' name='drop_off' value='".$drop_off2."' />";
+										echo "<input type='hidden' name='pick_up' value='".$pick_up->format('H:i:s')."' />";
+										echo "<input type='hidden' name='car_vin' value='".$row["C_VIN"]."'/>";
+										echo "<button type='submit' value='Submit'>Rent</button>";
+										echo "</td>";
+									echo "</tr>";
+								}
 							?>
 						</tbody>
 					</table>
 					<?php } 
-						
 
 					// We cannot rent.
 					else {
 						echo "<h4>No cars are available.  Please <a href='check_availability.php'>search</a> again.</h4>";
 					}
-				}
-
-
-				?>
-				<table class="table">
-					<caption>Cars Available</caption>
-					<tbody>
-						<thead>
-							<tr>
-								<th>Year</th><th>Make</th><th>Model</th><th>Rent</th>
-							</tr>
-						</thead>
-					<?php
-						$result = mysqli_query($conn, "SELECT * FROM Car NATURAL JOIN CarInfo NATURAL JOIN Location WHERE Car.CI_ID = CarInfo.CI_ID AND Car.LOC_ID = Location.LOC_ID AND C_VIN = '".$vins[0]."';");
-						while ($row = mysqli_fetch_assoc($result)) {
-							$no_cars = false;
-							echo "<tr>";
-								echo "<td>".$row["YEAR"]."</td>";
-								echo "<td>".$row["MAKE"]."</td>";
-								echo "<td>".$row["MODEL"]."</td>";
-								echo "<td>";
-								if (isset($_SESSION["USER_ID"])) {
-									echo "<form method='post' action='rent.php'>";
-								} else {
-									echo "<form method='post' action='login.php'>";
-								}
-								echo "<input type='hidden' name='date' value='".$date."' />";
-								echo "<input type='hidden' name='drop_off' value='".$drop_off2."' />";
-								echo "<input type='hidden' name='pick_up' value='".$pick_up->format('H:i:s')."' />";
-								echo "<input type='hidden' name='car_vin' value='".$row["C_VIN"]."'/>";
-								echo "<button type='submit' value='Submit'>Rent</button>";
-								echo "</td>";
-							echo "</tr>";
-						}
-					?>
-					</tbody>
-				</table>
-				<?php
-			
-				if ($no_cars) {
-					echo "<h4>No cars are available.  Please <a href='check_availability.php'>search</a> again.</h4>";
 				}
 				/*$used_vins = array();
 
