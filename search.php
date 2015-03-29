@@ -67,7 +67,7 @@
 				// The vehicle is available!
 				
 				while ($row = mysqli_fetch_assoc($result)) {
-					echo "Nums Absolute: ".$row[0];
+					//echo "Nums Absolute: ".$row["NUM"];
 					// Then we can rent.
 					if ($row["NUM"] == 0) { ?>
 						<table class="table">
@@ -113,7 +113,11 @@
 								echo "<td>".$row["MAKE"]."</td>";
 								echo "<td>".$row["MODEL"]."</td>";
 								echo "<td>";
-								echo "<form method='post' action='rent.php'>";
+								if (isset($_SESSION["USER_ID"])) {
+									echo "<form method='post' action='rent.php'>";
+								} else {
+									echo "<form method='post' action='login.php'>";
+								}
 								echo "<input type='hidden' name='date' value='".$date."' />";
 								echo "<input type='hidden' name='drop_off' value='".$drop_off2."' />";
 								echo "<input type='hidden' name='pick_up' value='".$pick_up->format('H:i:s')."' />";

@@ -13,8 +13,8 @@
 				// Check if there are any outstanding reservations that they currently have.
 				$date = date("Y-m-d");
 				$now = date("H:i:s");
-				
-				$result = mysqli_query($conn, "SELECT * FROM Reservation NATURAL JOIN Car NATURAL JOIN CarInfo WHERE Reservation.C_VIN = Car.C_VIN AND Car.CI_ID = CarInfo.CI_ID AND MEM_ID = '".$_SESSION["USER_ID"]."' AND DATE <= '".$date."' OR (DATE = '".$date."' AND PICK_UP <= '".$now."');");
+
+				$result = mysqli_query($conn, "SELECT * FROM Reservation NATURAL JOIN Car NATURAL JOIN CarInfo WHERE Reservation.C_VIN = Car.C_VIN AND Car.CI_ID = CarInfo.CI_ID AND MEM_ID = '".$_SESSION["USER_ID"]."' AND DATE < '".$date."' OR (DATE = '".$date."' AND PICK_UP <= '".$now."');");
 				
 				if (mysqli_num_rows($result) > 0) {
 					?>

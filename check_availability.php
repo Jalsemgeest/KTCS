@@ -22,9 +22,10 @@
 		    	?>
 			</select>
 		  </div>
+		  <?php $date = date("Y-m-d"); ?>
 		  <div class="form-group">
 		    <label for="date">Date</label>
-		    <input type="date" class="form-control" name="date" id="date" placeholder="Date">
+		    <?php echo "<input type='date' class='form-control' min='".$date."' name='date' id='date' placeholder='Date'>"; ?>
 		  </div>
 		  <div class="form-group">
 		    <label for="pick_up">Pickup Time</label>
