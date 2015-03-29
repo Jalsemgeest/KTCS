@@ -39,7 +39,7 @@
 				array_push($vins, $row["C_VIN"]);
 			}
 
-			echo $vins[0];
+			//echo $vins[0];
 
 			// Find VIN number
 			//$vins = array();
@@ -57,7 +57,6 @@
 			}
 
 			$qry = $qry .";";
-			echo "hello".$qry."world";
 			
 			$qry = "SELECT * FROM Cars";
 			$qry = "SELECT COUNT(*) AS `NUM` FROM `Reservation` WHERE `DATE`!= CURDATE() AND `C_VIN`= '$vins[0]'";
