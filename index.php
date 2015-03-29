@@ -155,7 +155,7 @@
 			echo "<meta HTTP-EQUIV='REFRESH' content='0; url=index.php'>";
 		}
 	 	else{
-	 		echo "please fill out all fields";
+	 		echo "<h2><br><center><strong><font color = 'red'> Please Fill Out All Fields</font></strong></h2>";
  		}
 	}
 
@@ -168,14 +168,15 @@
 
 	<body>
 	<br></br>
-	<h2> <center> Please leave us feedback :)</h2><hr size="2"/>;
+	<h3> <center> Please leave us feedback :)</h3><hr size="2"/>
 	<center>
 	<form action="index.php" method="POST">
 	<table>
 	<tr><td><strong>Title:</strong> <br><input type="text" name ="title"/></td></tr>
 	<tr><td colspan="2"><strong>Comment:</strong> </td></tr>
 	<tr><td colspan="5"><textarea name ="comment" rows="15" cols="100"></textarea></td></tr>
-	<tr><td colspan="2"><input type="submit" name="submit" value="Post"></td></tr>
+	<tr><td colspan="2"><br><input type="submit" name="submit" value="Add Your Comment"></td></tr>
+	
 	</table>
 	<hr size = "1">
 	</form>
