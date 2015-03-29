@@ -57,13 +57,17 @@
 			}
 
 			$qry = $qry .";";
-			echo $qry;
+			echo "hello".$qry."world";
+			
+			$qry = "SELECT * FROM Cars";
+			$qry = "SELECT COUNT(*) AS `NUM` FROM `Reservation` WHERE `DATE`!= CURDATE() AND `C_VIN`= '$vins[0]'";
 
 			$result = mysqli_query($conn, $qry);
 
 				// The vehicle is available!
 				
 				while ($row = mysqli_fetch_assoc($result)) {
+					echo "Nums Absolute: ".$row[0];
 					// Then we can rent.
 					if ($row["NUM"] == 0) { ?>
 						<table class="table">
