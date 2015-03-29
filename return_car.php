@@ -40,6 +40,8 @@
 
 				$result = mysqli_query($conn, "DELETE FROM Reservation WHERE RES_NUM = '".$res."' AND MEM_ID ='".$_SESSION["USER_ID"]."';");
 
+				$result = mysqli_query($conn, "UPDATE Car SET LAST_ODOM = '".$odom."' WHERE C_VIN ='".$vin."';");
+
 				if ($result) {
 					echo "<h4>Vehicle was successfully returned.</h4>";
 				} else {

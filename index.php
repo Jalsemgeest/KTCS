@@ -33,7 +33,7 @@
 							echo "<tr>";
 							echo "<td>".$row["RES_NUM"]."</td>";
 							echo "<td>".$row["MAKE"]. " " . $row["MODEL"] ."</td>";
-							echo "<td>".$row["PICK_UP"]."</td>";
+							echo "<td>".$row["DATE"]. " " . $row["PICK_UP"]."</td>";
 							echo "<td>";
 							?>
 								<form action="return_car.php" method="post">
