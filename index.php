@@ -80,10 +80,22 @@
 	}
 	
 	
-	$submit = $_POST['submit'];
-	$name = $_POST['title'];
-	$comment = $_POST['comment'];
+	$name = "";
+	if (isset($_POST['title'])){
+		$name = $_POST['title'];
+	}
+
+	$comment = "";
+	if (isset($_POST['comment'])){
+		$comment = $_POST['comment'];
+	}
 	
+	$submit = "";
+	if (isset($_POST['submit'])){
+		$submit = $_POST['submit'];
+	}
+
+
 	
 	if($submit){
 		if($name&&$comment){
@@ -123,11 +135,15 @@
 	$getquery=mysqli_query($conn, "SELECT * FROM COMMENTS GROUP BY COM_ID ASC LIMIT 10;");
 	while($row=mysqli_fetch_assoc($getquery)){
 
-
 		$TITLE=$row['TITLE'];
 		$COMMENT=$row['COMMENT'];
+	
 
+		// if ($row['MEM_ID'] == 1 && $EMP_ID == 0) {
+		// 	echo 
+		// }
 		// echo "<strong>Title:</strong>", $TITLE . '<br/>' . '<br/>' . "<strong>Comment:</strong>" ,$COMMENT . '<br/>' . '<br/>' . '<hr size="1"/>';
+	
 		echo "<strong>Title:</strong>", $TITLE . '<br/>' .  $COMMENT . '<br/>' . '<hr size="1"/>';
 	}
 	?>
