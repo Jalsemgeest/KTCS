@@ -75,6 +75,7 @@
 
 		  	<div class="item">
 			  <img style="max-height:510px;" src="img/corvette.jpg" alt="Corvette 2015">
+			  <br><br>
 			  <div class="carousel-caption">
 			    <h3>Corvette 2015</h3>
 			    <p>You know you'll want to rent this baby!</p>
@@ -82,20 +83,23 @@
 			</div>
 		    <div class="item active">
 		      <img style="max-height:510px;" src="img/ferrari.jpg" alt="Ferrari Enzo">
-		      <div class="carousel-caption">
-		      	<h3>Ferrari Enzo 2014</h3>
-		      	<p>Show up everyone else with this car!</p>
+		      <br><br><br>
+			  <div class="carousel-caption">
+		      	<h3><font color = 'black'>Ferrari Enzo 2014</font></h3>
+		      	<p><font color = 'black'>Show up everyone else with this car!</font></p>
 		      </div>
 		    </div>
 		    <div class="item">
 		      <img style="max-height:510px;" src="img/rover.jpg" alt="Range Rover 2015">
+			  <br><br><br>
 		      <div class="carousel-caption">
-		        <h3>Range Rover Turbo Sport 2014</h3>
-		        <p>Want to do some offroading in style?</p>
+		        <h3><font color = 'black'>Range Rover Turbo Sport 2014</font></h3>
+		        <p><font color = 'black'>Want to do some offroading in style?</font></p>
 		      </div>
 		    </div>
 		    <div class="item">
 		      <img style="max-height:510px;" src="img/aston.jpg" alt="Aston Martin Vantage 2015">
+			  <br><br>
 		      <div class="carousel-caption">
 		        <h3>Aston Martin Vantage 2015</h3>
 		        <p>James... James Bond.</p>
